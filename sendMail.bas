@@ -32,7 +32,7 @@ Sub sendMail()
        
     With ActiveWorkbook.Sheets("Form")
         sTo = .Range("BB1").Value
-        sSubject = "Çàÿâêà íà " + "'" + .Range("E4").Value + "'"
+        sSubject = "Заявка на " + "'" + .Range("E4").Value + "'"
         sBody = .Range("BA3").Value
         sBody = Replace(sBody, Chr(10), "<br />")
         sBody = Replace(sBody, vbNewLine, "<br />")
@@ -43,8 +43,8 @@ Sub sendMail()
     End With
     
     With objMail
-        .To = sTo 'àäðåñ ïîëó÷àòåëÿ
-        .Subject = sSubject 'òåìà ñîîáùåíèÿ
+        .To = sTo
+        .Subject = sSubject
         .BodyFormat = 2
         .HTMLBody = sBody
         .Attachments.Add ActiveWorkbook.FullName
