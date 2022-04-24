@@ -1,4 +1,4 @@
-Sub sendMail()
+Sub Send_Mail()
     Dim x As String
     Dim oOutlApp As Object, objMail As Object
     Dim sTo As String, sSubject As String, sBody As String, sTblBody As String, sAttachment As String
@@ -31,28 +31,25 @@ Sub sendMail()
     If Err.Number <> 0 Then Set oOutlApp = Nothing: Set objMail = Nothing: Exit Sub
        
     With ActiveWorkbook.Sheets("Form")
-        sTo = .Range("BB1").Value
-        sSubject = "Заявка на " + "'" + .Range("E4").Value + "'"
-        sBody = .Range("BA3").Value
+        sTo = .Range("AJ2").Value
+        sSubject = "Çàÿâêà íà " + "'" + .Range("D6").Value + "'"
+        sBody = .Range("AG4").Value
         sBody = Replace(sBody, Chr(10), "<br />")
         sBody = Replace(sBody, vbNewLine, "<br />")
         sBody = "<span style=""font-size: 14px; font-family: Arial"">" & sBody & "</span>"
-        Set rDataR = Sheets("Application").Range("$A$1:$BI$44")
+        Set rDataR = Sheets("Application").Range("$A$2:$BI$45")
         sTblBody = ConvertRngToHTM(rDataR)
         sBody = Replace(sBody, "{TABLE}", sTblBody)
     End With
     
     With objMail
-        .To = sTo
-        .Subject = sSubject
+        .To = sTo 'àäðåñ ïîëó÷àòåëÿ
+        .Subject = sSubject 'òåìà ñîîáùåíèÿ
         .BodyFormat = 2
         .HTMLBody = sBody
         .Attachments.Add ActiveWorkbook.FullName
-        .display
+        .Display
     End With
-    
-    If IsOultOpen = False Then oOutlApp.Quit
-    Set oOutlApp = Nothing: Set objMail = Nothing
     DoEvents
 End Sub
 
@@ -128,3 +125,4 @@ Function RangeToTextTable(rng As Range)
     Next
     RangeToTextTable = res
 End Function
+
